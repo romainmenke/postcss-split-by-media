@@ -1,0 +1,16 @@
+.foo {
+	color: red;
+}
+
+
+@supports (color: blue) and (color: red) {
+	.foo {
+		color: red;
+	}
+
+	.baz {
+		color: blue;
+	}
+}
+
+/*# sourceMappingURL=multiple-map.result.css.map */

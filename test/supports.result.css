@@ -1,0 +1,9 @@
+@supports (color: blue) and (color: red) {
+	.foo {
+		color: red;
+	}
+
+	.baz {
+		color: blue;
+	}
+}

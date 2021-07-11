@@ -1,0 +1,9 @@
+@container (min-width: 700px) {
+	.foo {
+		color: red;
+	}
+
+	.baz {
+		color: blue;
+	}
+}

@@ -1,0 +1,30 @@
+@container (min-width: 700px) {
+
+	@media (min-width: 240px) {
+		.foo {
+			color: blue;
+		}
+
+		@keyframes slidein {
+			from {
+				transform: translateX(0%);
+			}
+
+			to {
+				transform: translateX(100%);
+			}
+		}
+	}
+}
+
+@media (min-width: 240px) {
+	.baz {
+		color: red;
+	}
+
+	@container (min-width: 700px) {
+		.baz {
+			color: blue;
+		}
+	}
+}

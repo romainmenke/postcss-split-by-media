@@ -1,0 +1,54 @@
+.foo {
+	color: red;
+}
+
+@media (min-width: 520px) {
+	.foo {
+		color: blue;
+	}
+}
+
+
+@supports (color: blue) and (color: red) {
+	.foo {
+		color: red;
+	}
+
+	@media (min-width: 240px) {
+		.foo {
+			color: blue;
+		}
+
+		@keyframes slidein {
+			from {
+				transform: translateX(0%);
+			}
+
+			to {
+				transform: translateX(100%);
+			}
+		}
+	}
+
+	.baz {
+		color: blue;
+	}
+}
+
+@media (min-width: 240px) {
+	.baz {
+		color: red;
+	}
+
+	@supports (color: blue) {
+		.baz {
+			color: blue;
+		}
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.foo {
+		color: purple;
+	}
+}
