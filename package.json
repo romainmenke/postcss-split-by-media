@@ -1,6 +1,6 @@
 {
   "name": "postcss-split-by-media",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Split CSS by @media with PostCSS",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/romainmenke/postcss-split-by-media.git"
   },
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=16.0.0"
   },
   "peerDependencies": {
     "postcss": "^8.3.5"
