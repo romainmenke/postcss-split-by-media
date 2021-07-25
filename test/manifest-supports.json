@@ -1,1 +1,1 @@
-{"(min-width: 240px)":{"base":"supports.result.at-media-min-width-240px.css","media":"(min-width: 240px)"},"all":{"base":"supports.result.css","media":""}}
+[{"base":"supports.result.css","media":""},{"base":"supports.result.at-media-min-width-240px.css","media":"(min-width: 240px)"}]

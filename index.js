@@ -1,8 +1,9 @@
 const path = require( 'path' );
 const fsp = require( 'fs' ).promises;
-
+const createSort = require('./sort-media-queries');
 
 const creator = (pluginOpts) => {
+	sorter = createSort();
 	return {
 		postcssPlugin: 'split-by-media',
 		prepare: function prepare(_result) {
@@ -83,19 +84,27 @@ const creator = (pluginOpts) => {
 						} )() );
 					}
 
-					manifest.all = {
-						base: path.parse( resultOpts.to ).base,
-						media: '',
-					};
+					const sortedManifest = [
+						{
+							base: path.parse( resultOpts.to ).base,
+							media: '',
+						}
+					];
+					const manifestKeys = Object.keys(manifest);
+					manifestKeys.sort(sorter);
+
+					manifestKeys.forEach((key) => {
+						sortedManifest.push(manifest[key]);
+					});
 
 					if (manifestCallback) {
-						manifestCallback(manifest);
+						manifestCallback(sortedManifest);
 					} else {
 						fsWrites.push((async () => {
 							const pathInfo = path.parse(resultOpts.to);
 							pathInfo.base = `manifest-${path.parse(resultOpts.from).name}.json`;
 
-							await fsp.writeFile(path.format(pathInfo), JSON.stringify(manifest));
+							await fsp.writeFile(path.format(pathInfo), JSON.stringify(sortedManifest));
 						})());
 					}
 

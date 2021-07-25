@@ -61,16 +61,16 @@ output file b :
 manifest :
 
 ```json
-{
-    "(min-width: 240px)": {
-        "base": "breakpoint.result.at-media-min-width-240px.css",
-        "media": "(min-width: 240px)"
-    },
-    "all": {
+[
+    {
         "base": "breakpoint.result.css",
         "media": ""
     }
-}
+    {
+        "base": "breakpoint.result.at-media-min-width-240px.css",
+        "media": "(min-width: 240px)"
+    },
+]
 ```
 
 ## Supports
