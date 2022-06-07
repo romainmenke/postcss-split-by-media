@@ -1,0 +1,13 @@
+
+
+@media (min-width: 480px) {
+	.baz {
+		color: red;
+	}
+
+	@supports (color: blue) {
+		.baz {
+			color: blue;
+		}
+	}
+}

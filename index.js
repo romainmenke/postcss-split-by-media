@@ -13,17 +13,19 @@ const creator = (pluginOpts) => {
 			const queries = new Map();
 
 			return {
-				AtRule: {
-					media: ( mediaAtRule, {
-						result,
-					} ) => {
-						if ( 0 === mediaAtRule.nodes.length ) {
+				OnceExit: async (root, { result }) => {
+					root.walkAtRules((mediaAtRule) => {
+						if (mediaAtRule.name !== 'media') {
+							return;
+						}
+
+						if (0 === mediaAtRule.nodes.length) {
 							return;
 						}
 
 						let splitResult;
-						if ( queries.has( mediaAtRule.params ) ) {
-							splitResult = queries.get( mediaAtRule.params );
+						if (queries.has(mediaAtRule.params)) {
+							splitResult = queries.get(mediaAtRule.params);
 						} else {
 							const splitRoot = result.root.clone();
 							splitRoot.removeAll();
@@ -31,24 +33,24 @@ const creator = (pluginOpts) => {
 								root: splitRoot,
 								opts: {
 									from: result.opts.from,
-									to: generatePathForTo( result.opts.to, mediaAtRule.params ),
+									to: generatePathForTo(result.opts.to, mediaAtRule.params),
 								},
 							};
 
-							queries.set( mediaAtRule.params, splitResult );
+							queries.set(mediaAtRule.params, splitResult);
 						}
 
 						let clone = mediaAtRule.clone();
 
-						if ( mediaAtRule.parent && mediaAtRule.parent !== result.root ) {
+						if (mediaAtRule.parent && mediaAtRule.parent !== result.root) {
 							let rule = mediaAtRule.parent;
-							while ( true ) {
+							while (true) {
 								const parentClone = rule.clone();
 								parentClone.removeAll();
-								parentClone.append( clone );
+								parentClone.append(clone);
 								clone = parentClone;
 
-								if ( !rule.parent || rule.parent === result.root ) {
+								if (!rule.parent || rule.parent === result.root) {
 									break;
 								}
 
@@ -56,11 +58,10 @@ const creator = (pluginOpts) => {
 							}
 						}
 
-						splitResult.root.append( clone );
+						splitResult.root.append(clone);
 						mediaAtRule.remove();
-					},
-				},
-				OnceExit: async() => {
+					});
+
 					const fsWrites = [];
 					for ( const [
 						media,

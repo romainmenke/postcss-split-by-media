@@ -1,10 +1,10 @@
 {
   "name": "postcss-split-by-media",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Split CSS by @media with PostCSS",
   "main": "index.js",
   "scripts": {
-    "test": "postcss-tape --plugin index.js"
+    "test": "postcss ./test/*.css --dir ./test-results"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "postcss": "^8.3.5",
-    "postcss-tape": "^6.0.0"
+    "postcss-cli": "^9.1.0"
   },
   "keywords": [
     "PostCSS",
